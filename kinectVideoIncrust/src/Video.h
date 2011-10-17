@@ -10,8 +10,9 @@ public:
 	void update();
 	void draw();
     
-    ci::qtime::MovieGl      mMovie; 
+    ci::qtime::MovieSurface      mMovie; 
     ci::gl::Texture         mFrameTexture;
+    ci::Surface             mFrameSurface;
     ci::gl::Texture::Format mFrameFormat;
     ci::Rectf               mCenteredRect;
 	float                   mAlpha;

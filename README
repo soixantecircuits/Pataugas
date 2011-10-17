@@ -1,0 +1,7 @@
+Put kinectVideoIncrust in your cinder/samples folder
+Get https://github.com/cinder/Cinder-Kinect and copy the content of each folder in the equivalent cinder folder
+	eg. include/Kinect.h to cinder/include/Kinect.h
+
+TODO: 	– reverse Video, glRotate works with a png but not with kinect stream
+	– make the chormakey more efficient: use shaders
+	– do some antialiasing after chromakey

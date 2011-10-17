@@ -16,7 +16,7 @@ void VideoKin::setup()
     try {
         console() << "There is " << Kinect::getNumDevices() << " Kinect connected." << std::endl;
         mKinect = Kinect( Kinect::Device() );
-        console() << "Kinect is initilized." << std::endl; 
+        console() << "Kinect is initailized." << std::endl; 
     } 
     catch ( ... ) {
         console() << "Unable to initialize the Kinect!" << std::endl;
@@ -30,9 +30,10 @@ void VideoKin::setup()
 
 void VideoKin::update()
 {
-    if( mKinect.checkNewVideoFrame() )
-            mColorTexture = gl::Texture( mKinect.getVideoImage() );
-   
+    if   ( Kinect::getNumDevices() > 0){
+        if( mKinect.checkNewVideoFrame())
+                mColorTexture = gl::Texture( mKinect.getVideoImage() );
+    }
     mCenteredRect = Rectf( mColorTexture.getBounds() ).getCenteredFit( getWindowBounds(), true );
 }
 
@@ -41,7 +42,18 @@ void VideoKin::draw()
     if( mColorTexture )
     {
         gl::color( ColorA(1.0f, 1.0f, 1.0f, 1.0f) );
+        
+        glMatrixMode(GL_TEXTURE);
+        glBindTexture(GL_TEXTURE_2D, mColorTexture.getId());
+        glLoadIdentity();
+        //glTranslatef(800.0,600.0,0.0);
+        //glRotatef(70.0, 0.0, 0.0, 1.0);
+        //glTranslatef(0.0,10.0,0.0);
+        glMatrixMode(GL_MODELVIEW);
+    
         gl::draw(mColorTexture, mCenteredRect);
+
+        
     }
 
 }
